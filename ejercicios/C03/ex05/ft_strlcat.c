@@ -6,41 +6,35 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 22:21:40 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/03/11 15:51:10 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:54:49 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-
-int	ft_strlen(char *str)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
-	unsigned int	dest_len;
+	unsigned int	j;
+	unsigned int	a;
 
-	dest_len = ft_strlen(dest);
-	if (src[0] == '\0')
-		return (dest_len);
+	a = 0;
+	j = 0;
 	i = 0;
-	while (src[i] != '\0' && (dest_len + i) < size - 1)
-	{
-		dest[dest_len + i] = src[i];
+	while (dest[i] != '\0')
 		i++;
-	}
-	dest[dest_len + i] = '\0';
-	if (dest_len > size)
-		return (ft_strlen(src) + size);
+	while (src[a] != '\0')
+		a++;
+	if (size <= i)
+		a += size;
 	else
-		return (dest_len + ft_strlen(src));
+		a += i;
+	while (src[j] != '\0' && (i + 1) < size)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (a);
 }
 /*
 #include <stdio.h>
@@ -48,10 +42,10 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 
 int	main(void)
 {
-    char dest[20] = "Hello, ";
-    char src[] = "world!";
-	char dest2[20] = "Hello, ";
-	char src2[] = "world!";
+    char dest[20] = "hola";
+    char src[] = "hola";
+	char dest2[20] = "hola";
+	char src2[] = "hola";
     unsigned int size = 8;
 
     printf("Before ft_strlcat: dest = \"%s\"\n", dest);
@@ -62,4 +56,5 @@ int	main(void)
     printf("After strlcat: dest = \"%s\"\n", dest2);
 
     return (0);
-}*/
+}
+*/
