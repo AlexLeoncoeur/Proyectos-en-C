@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:40:23 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/11 18:52:58 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:20:10 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return ((void *)ptr);
 }
-
-/* #include <unistd.h>
+/* 
+#include <unistd.h>
 
 int	main(void)
 {
 	char *test = ft_calloc(5, sizeof(char));
 
 	int i = 0;
-	while (i <= 6)
+	while (i <= 11)
 	{
 		if (test[i] == '\0')
 			write(1, "A", 1);
