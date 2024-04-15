@@ -3,123 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarenas- <aarenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:49:29 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/13 19:22:36 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:15:57 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_charcount(char const *s, char c)
+void	ft_free(char **str)
 {
 	int	i;
-	int	count;
 
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+int	ft_word_counter(char const *s, char c)
+{
+	char	bool;
+	int		i;
+	int		count;
+
+	bool = 'T';
 	count = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
+		if (bool == 'T' && s[i] != c)
+		{
 			count++;
+			bool = 'F';
+		}
+		else if (s[i] == c)
+			bool = 'T';
 		i++;
 	}
 	return (count);
 }
-
-int	ft_modstrchr(const char *s, int c)
-{
-	unsigned char	aux;
-	int				i;
-	char			*tmp;
-
-	aux = (char)c;
-	i = 0;
-	tmp = (char *)s;
-	if (s[0] == c)
-		i++;
-	while (tmp[i] != '\0')
-	{
-		if (tmp[i] == aux)
-			return (i);
-		i++;
-	}
-	if (aux == '\0' || c == 1024)
-	{
-		return (i);
-	}
-	else
-		return (0);
-}
-
-static int	ft_separator(int i, int j)
-{
-	int	count;
-
-	count = 0;
-	while (i < j)
-	{
-		count++;
-		i++;
-	}
-	return (count);
-}
-
-/* char	**ft_malloc(int *len, int ccount)
-{
-	char	**str;
-	int		i;
-
-	i = 0;
-	**str = malloc(sizeof(char *) * (ccount + 1));
-	while (i < ccount)
-	{
-		str[i] = malloc(sizeof(char) * len[i]);
-		i++;
-	}
-	str[i] = '\0';
-	return (**str);
-} */
 
 char	**ft_split(char const *s, char c)
 {
-	int		ccount;
-	int		i;
-	int		*pos;
-	int		*len;
 	char	**str;
+	int		word_count;
+	int		i;
+	int		j;
 
 	i = 0;
-	ccount = ft_charcount(s, c);
-	pos = malloc(sizeof(int) * (ccount + 1));
-	len = malloc(sizeof(int) * (ccount + 1));
-	while (i++ < ccount && s[i] != '\0')
-		pos[i] = ft_modstrchr(&s[i], c);
-	i = 0;
-	while (i++ < ccount)
-		len[i] = ft_separator(pos[i], pos[i + 1]);
-	i = 0;
-	str = malloc(sizeof(char *) * (ccount + 1));
-	while (i++ < ccount)
-		str[i] = ft_substr(s, pos[i], len[i]);
-	*str[i] = '\0';
+	j = 0;
+	word_count = 0;
+	str = malloc(sizeof(char *) * (ft_word_counter(s, c) + 1));
+	if (!str)
+		return (NULL);
+	while (word_count < ft_word_counter(s, c))
+	{
+		while (s[i] == c)
+			i++;
+		j = i;
+		while (s[i] != '\0' && s[i] != c)
+			i++;
+		str[word_count] = ft_substr(s, j, i - j);
+		if (!str[word_count])
+			return (ft_free(str), NULL);
+		word_count++;
+	}
+	str[word_count] = NULL;
 	return (str);
 }
 
-#include <stdio.h>
-
-int	main(void)
+/* void	ft_leaks()
+{
+	system("leaks -q substr");
+	atexit(ft_leaks);
+}
+ */
+/* int	main(void)
 {
 	int		i = 0;
-	char	s[] = "pipo es un buen perro";
-	char	c = ' ';
-	char	**str = ft_split(s, c);
+	char	**str = ft_split("hello!", ' ');
 
-	while (str[i][0] != '\0')
+	if (!str)
+		return (1);
+	while (str[i])
 	{
 		printf("%s\n", str[i]);
 		i++;
 	}
+	ft_free(str);
 	return (0);
-}
+} */
