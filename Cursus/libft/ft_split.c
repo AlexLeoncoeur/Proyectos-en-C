@@ -6,13 +6,13 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:49:29 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/15 19:15:57 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:09:49 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free(char **str)
+static void	ft_free(char **str)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	ft_free(char **str)
 	free(str);
 }
 
-int	ft_word_counter(char const *s, char c)
+static int	ft_word_counter(char const *s, char c)
 {
 	char	bool;
 	int		i;
