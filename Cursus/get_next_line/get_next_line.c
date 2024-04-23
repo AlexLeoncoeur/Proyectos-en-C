@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:28:47 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/22 18:26:30 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:32:42 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static char	*ft_join(int i, char *c, char *str, char *tmp)
 	tmp = str;
 	c[i] = '\0';
 	str = ft_strjoin(tmp, c);
+	//if (tmp && c && str)
 	free(tmp);
 	return (str);
 }
@@ -73,42 +74,41 @@ char	*get_next_line(int fd)
 	{
 		i = read(fd, c, BUFFER_SIZE);
 		if (i < 0 && c)
-			return (free(c), str);
-		if (i == 0 && str)
-			return (str);
-		else if (i <= 0)
 			return (free(c), NULL);
+		else if (i == 0 && str)
+			return (str);
+		else if (i == 0 && !c)
+			return (NULL);
 		str = ft_join(i, c, str, tmp);
 	}
+	free(c);
 	i = ft_strlen(ft_strchr(str, '\n'));
 	next_line = ft_substr(str, ft_find_n(str) + 1, i);
 	tmp = ft_strchr(str, '\n') + 1;
 	*tmp = '\0';
-	return (free(c), str);
+	return (str);
 }
-
-/* void	leaks(void)
+/* 
+void	leaks(void)
 {
 	system("leaks -q a.out");
+	atexit(leaks);
 } */
 
 /* read devuelve el numero de caracteres que ha leido y los guarda en *c. */
 
-/* int main(int ac, char **av)
+int main(void)
 {
 	char	*str;
 
-	if (ac != 2)
-		return 0;
-	int fd = open(av[1], O_RDONLY);
+	int fd = open("pipo.txt", O_RDONLY);
 	if (fd == -1)
 		return 0;
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 4; i++)
 	{
 		str = get_next_line(fd);
 		printf("%s", str);
 		free(str);
 	}
-	atexit(leaks);
 	return (0);
-} */
+}

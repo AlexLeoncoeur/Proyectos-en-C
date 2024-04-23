@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:15:51 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/22 15:41:11 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:30:44 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	ft_is_in_str(const char *s, int c)
 	i = 0;
 	aux = (char)c;
 	tmp = (char *)s;
+	if (tmp == NULL)
+		return (0);
 	while (tmp[i] != '\0')
 	{
 		if (tmp[i] == aux)
