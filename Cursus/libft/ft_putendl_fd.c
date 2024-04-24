@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:23:06 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/16 15:25:50 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:16:18 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putendl_fd(char *s, int fd)
 
 	i = 0;
 	if (fd < 0 || !s)
-		exit (0);
+		return ;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);

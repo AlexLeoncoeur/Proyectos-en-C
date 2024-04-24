@@ -14,14 +14,14 @@ all: $(NAME)
 $(NAME): $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 
-$(OFILES): $(CFILES)
-	$(CC) $(CFLAGS) -c $(CFILES) 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
 
 clean:
 	rm -f $(OFILES)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_OFILES)
 
 re: fclean all
 

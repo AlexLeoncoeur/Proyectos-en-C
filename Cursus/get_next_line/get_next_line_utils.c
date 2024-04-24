@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:15:51 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/23 15:30:44 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:39:39 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strchr(const char *s, int c)
 	tmp = (char *)s;
 	while (tmp[i] != '\0')
 	{
-		if (tmp[i] == aux)
+		if (tmp[i] != '\0' && tmp[i] == aux)
 			return (&tmp[i]);
 		i++;
 	}
@@ -52,7 +52,7 @@ char	*ft_strchr(const char *s, int c)
 int	ft_is_in_str(const char *s, int c)
 {
 	unsigned char	aux;
-	int				i;
+	size_t			i;
 	char			*tmp;
 
 	i = 0;
@@ -66,10 +66,13 @@ int	ft_is_in_str(const char *s, int c)
 			return (1);
 		i++;
 	}
-	if (aux == '\0' && tmp[i] == '\0')
-		return (1);
-	else
-		return (0);
+/* 	while (i <= BUFFER_SIZE)
+	{
+		if (tmp[i] == '\0')
+			return (1);
+		i++;
+	} */
+	return (0);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

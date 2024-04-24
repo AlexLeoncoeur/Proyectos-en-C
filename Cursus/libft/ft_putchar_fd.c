@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:33:03 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/16 14:54:47 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:16:12 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putchar_fd(char c, int fd)
 {
 	if (fd < 0)
-		exit (0);
+		return ;
 	write(fd, &c, 1);
 }
 

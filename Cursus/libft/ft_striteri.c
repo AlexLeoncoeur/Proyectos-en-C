@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:54:17 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/16 14:26:32 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:17:04 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	char			*aux;
 
 	if (!s || !f)
-		exit (0);
+		return ;
 	i = 0;
 	aux = s;
 	while (s[i])

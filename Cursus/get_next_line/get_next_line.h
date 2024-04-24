@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:35:06 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/22 12:52:31 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:44:48 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 2
 # endif
 
 size_t		ft_strlen(const char *str);

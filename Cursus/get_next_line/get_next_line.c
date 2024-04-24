@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:28:47 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/23 15:32:42 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:29:16 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static size_t	ft_find_n(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\n')
+	while (str && str[i] != '\n')
 	{
 		i++;
 	}
@@ -76,24 +76,22 @@ char	*get_next_line(int fd)
 		if (i < 0 && c)
 			return (free(c), NULL);
 		else if (i == 0 && str)
-			return (str);
+			return (free(c), str);
 		else if (i == 0 && !c)
 			return (NULL);
 		str = ft_join(i, c, str, tmp);
 	}
-	free(c);
 	i = ft_strlen(ft_strchr(str, '\n'));
 	next_line = ft_substr(str, ft_find_n(str) + 1, i);
 	tmp = ft_strchr(str, '\n') + 1;
 	*tmp = '\0';
-	return (str);
-}
-/* 
+	return (free(c), str);
+} 
+
 void	leaks(void)
 {
 	system("leaks -q a.out");
-	atexit(leaks);
-} */
+}
 
 /* read devuelve el numero de caracteres que ha leido y los guarda en *c. */
 
@@ -104,11 +102,12 @@ int main(void)
 	int fd = open("pipo.txt", O_RDONLY);
 	if (fd == -1)
 		return 0;
-	for(int i = 0; i < 4; i++)
+	for(int i = 0; i < 3; i++)
 	{
 		str = get_next_line(fd);
 		printf("%s", str);
 		free(str);
 	}
+	atexit(leaks);
 	return (0);
 }

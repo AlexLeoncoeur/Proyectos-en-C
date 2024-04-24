@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 15:07:05 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/17 18:16:35 by aarenas-         ###   ########.fr       */
+/*   Created: 2024/04/17 10:50:08 by aarenas-          #+#    #+#             */
+/*   Updated: 2024/04/17 11:27:41 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	i;
+	t_list	*aux;
 
-	i = 0;
-	if (fd < 0 || !s)
+	if (!lst || !del)
 		return ;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	del(lst->content);
+	aux = lst;
+	lst = aux->next;
+	free(aux);
 }
-
-/* int	main(void)
-{
-	int	fd = open("pipo.txt", O_WRONLY);
-	ft_putstr_fd("pipo es un buen perro", fd);
-	return (0);
-}  */

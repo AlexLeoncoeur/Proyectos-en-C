@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 15:07:05 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/17 18:16:35 by aarenas-         ###   ########.fr       */
+/*   Created: 2024/04/17 12:47:18 by aarenas-          #+#    #+#             */
+/*   Updated: 2024/04/17 14:50:42 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+t_list	*ft_lstmap(t_list *lst, void *(f)(void *), void (*del)(void *))
 {
-	int	i;
+	t_list	*aux;
+	t_list	*tmp;
 
-	i = 0;
-	if (fd < 0 || !s)
-		return ;
-	while (s[i])
+	aux = 0;
+	if (!lst || !f || !del)
+		return (0);
+	while (lst)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		tmp = ft_lstnew(f(lst->content));
+		if (tmp)
+		{
+			ft_lstadd_back(&aux, tmp);
+			lst = lst->next;
+		}
+		else
+		{
+			ft_lstclear(&aux, del);
+			return (0);
+		}
 	}
+	return (aux);
 }
-
-/* int	main(void)
-{
-	int	fd = open("pipo.txt", O_WRONLY);
-	ft_putstr_fd("pipo es un buen perro", fd);
-	return (0);
-}  */
