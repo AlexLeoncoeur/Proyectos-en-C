@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:28:47 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/26 10:42:33 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:12:46 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_join(char *next_line, char *c)
 {
@@ -97,45 +97,66 @@ static char	*ft_read_line(int fd, char *next_line)
 
 char	*get_next_line(int fd)
 {
-	static char	*next_line = NULL;
+	static char	*next_line[10240];
 	char		*str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, 0, 0) < 0)
 	{
-		if (next_line != NULL)
+		if (next_line[fd] != NULL)
 		{
-			free(next_line);
-			next_line = NULL;
+			free(next_line[fd]);
+			next_line[fd] = NULL;
 		}
 		return (NULL);
 	}
-	next_line = ft_read_line(fd, next_line);
-	str = ft_actual_line(next_line);
-	next_line = ft_next_line(next_line);
+	next_line[fd] = ft_read_line(fd, next_line[fd]);
+	str = ft_actual_line(next_line[fd]);
+	next_line[fd] = ft_next_line(next_line[fd]);
 	return (str);
 }
 
 /* void	leaks(void)
 {
-	system("leaks -q a.out");
-	atexit(leaks);
-} */
+	system("leaks -q bonus");
+}
 
-/* int main(void)
+int main(void)
 {
 	char	*str;
 
-	int fd = open("pipo.txt", O_RDONLY);
-	if (fd == -1)
+	int fd1 = open("pipo.txt", O_RDONLY);
+	if (fd1 == -1)
 		return 0;
-	for(int i = 0; i < 4; i++)
+	for(int i = 0; i < 1; i++)
 	{
-		str = get_next_line(fd);
+		str = get_next_line(fd1);
 		printf("%s", str);
 		free(str);
 	}
+	int fd2 = open("pipo2.txt", O_RDONLY);
+	if (fd2 == -1)
+		return 0;
+	for(int i = 0; i < 1; i++)
+	{
+		str = get_next_line(fd2);
+		printf("%s", str);
+		free(str);
+	}
+	for(int i = 0; i < 1; i++)
+	{
+		str = get_next_line(fd1);
+		printf("%s", str);
+		free(str);
+	}
+	for(int i = 0; i < 1; i++)
+	{
+		str = get_next_line(fd2);
+		printf("%s", str);
+		free(str);
+	}
+	atexit(leaks);
 	return (0);
 } */
 

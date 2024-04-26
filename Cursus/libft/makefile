@@ -27,7 +27,7 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(BONUS_OFILES)
-	@ ar rcs $(NAME) $(OFILES) $(BONUS_OFILES)
+bonus: all $(BONUS_OFILES)
+	@ ar rcs $(NAME) $(BONUS_OFILES)
 
 .PHONY: all clean fclean re bonus
