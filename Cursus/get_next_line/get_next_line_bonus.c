@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:28:47 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/26 12:12:46 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:34:53 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,17 @@ char	*get_next_line(int fd)
 	next_line[fd] = ft_read_line(fd, next_line[fd]);
 	str = ft_actual_line(next_line[fd]);
 	next_line[fd] = ft_next_line(next_line[fd]);
+	if (str[0] == '\0')
+		return (free(str), NULL);
 	return (str);
 }
 
-/* void	leaks(void)
+/*  void	leaks(void)
 {
 	system("leaks -q bonus");
-}
+} */
 
-int main(void)
+/*  int main(void)
 {
 	char	*str;
 
@@ -156,8 +158,8 @@ int main(void)
 		printf("%s", str);
 		free(str);
 	}
-	atexit(leaks);
+	//atexit(leaks);
 	return (0);
-} */
+}  */
 
 /* read devuelve el numero de caracteres que ha leido y los guarda en *c. */

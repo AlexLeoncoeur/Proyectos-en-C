@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:28:47 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/26 10:42:33 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:34:12 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ char	*get_next_line(int fd)
 	next_line = ft_read_line(fd, next_line);
 	str = ft_actual_line(next_line);
 	next_line = ft_next_line(next_line);
+	if (str[0] == '\0')
+		return (free(str), NULL);
 	return (str);
 }
 
