@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:49:29 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/16 11:09:49 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/06/17 17:42:34 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ char	**ft_split(char const *s, char c)
 	atexit(ft_leaks);
 }
  */
-/* int	main(void)
+/*int	main(void)
 {
 	int		i = 0;
-	char	**str = ft_split("hello!", ' ');
+	char	**str = ft_split("doesntexist", ' ');
 
 	if (!str)
 		return (1);
@@ -97,4 +97,4 @@ char	**ft_split(char const *s, char c)
 	}
 	ft_free(str);
 	return (0);
-} */
+}*/

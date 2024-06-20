@@ -6,7 +6,7 @@
 /*   By: aarenas- <aarenas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:44:06 by aarenas-          #+#    #+#             */
-/*   Updated: 2024/04/15 12:31:00 by aarenas-         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:04:59 by aarenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	size = ft_strlen(s1) + ft_strlen(s2);
+	if (size == 0)
+		return (ft_strdup(""));
 	aux = malloc(sizeof(char) * (size + 1));
 	if (aux == NULL)
 		return (0);
-	while (s1[i] != '\0')
+	while (s1 && s1[i] != '\0')
 	{
 		aux[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != '\0')
+	while (s2 && s2[j] != '\0')
 	{
 		aux[i + j] = s2[j];
 		j++;
